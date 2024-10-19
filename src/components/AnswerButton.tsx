@@ -4,13 +4,17 @@ export default function AnswerButton({
   answer,
   questionType,
 }: {
-  answer: { label: string; value: string };
+  answer: { label: string; value: string | string[] };
   questionType: keyof QuizState;
 }) {
-  const { answers, updateAnswer } = useQuizContext();
+  const { answers, updateAnswer, updateFrequency } = useQuizContext();
 
   const handleUpadteAnswer = () => {
-    updateAnswer(questionType, answer.value);
+    if (answer.value instanceof Array) {
+      updateFrequency(answer.value);
+    } else {
+      updateAnswer(questionType, answer.value);
+    }
   };
 
   const isActive = answers[questionType] == answer.value;

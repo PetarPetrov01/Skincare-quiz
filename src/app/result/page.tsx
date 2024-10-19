@@ -2,17 +2,17 @@ import LinkToBeginning from "@/components/RedirectToStart";
 import Slider from "@/components/Slider";
 import { Product } from "@/types/Product";
 import Image from "next/image";
-import Link from "next/link";
 
 export default async function ResultPage() {
   let products: Product[] = [];
   const res = await fetch(
-    "https://jeval.com.au/collections/hair-care/products.json?page=1"
+    "https://jeval.com.au/collections/hair-care/products.json?page=1",
+    { cache: "no-cache" }
   );
   if (!res.ok) {
     console.log(res.json());
   } else {
-    products = (await res.json()).products;
+    products = (await res.json()).products;    
   }
 
   return (
@@ -39,7 +39,9 @@ export default async function ResultPage() {
                 cared for. And by choosing relaxing fragrances you can add a
                 moment of calm to the end of your day.
               </p>
-              <LinkToBeginning className="px-8 py-3 text-[16px] rounded-md border-2 border-white text-white">Retake the quiz</LinkToBeginning>
+              <LinkToBeginning className="px-8 py-3 text-[16px] rounded-md border-2 border-white text-white">
+                Retake the quiz
+              </LinkToBeginning>
             </div>
           </div>
         </div>
