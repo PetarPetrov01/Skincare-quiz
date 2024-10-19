@@ -43,3 +43,7 @@ export type Product = {
   variants: ProductVariant[];
   images: ProductImage[];
 };
+
+export type ScoredProduct = Product & {
+  score: number;
+};

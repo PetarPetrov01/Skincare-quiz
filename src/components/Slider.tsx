@@ -3,6 +3,8 @@
 import { useState } from "react";
 import ProductCard from "./ProductCard";
 import { Product } from "@/types/Product";
+import { useQuizContext } from "@/contexts/QuizContext";
+import scoreProduct from "@/utils/scoreProducts";
 
 export default function Slider({
   products,
@@ -12,6 +14,14 @@ export default function Slider({
   products: Product[];
 }) {
   const [currentPage, setCurrentPage] = useState(1);
+  const { answers } = useQuizContext();
+
+  const scoredProds = products.map((prod) => scoreProduct(prod, answers));
+  const sortedProds = scoredProds.sort((a, b) => b.score - a.score);
+  const countOfNonZero = scoredProds.filter((p) => p.score > 0);
+  console.log(countOfNonZero.length);
+  console.log(countOfNonZero)
+  // TODO: Render this array!
 
   const pagesCount = Math.ceil((products.length + 1) / 3);
 
@@ -49,7 +59,7 @@ export default function Slider({
           </p>
         </div>
       )}
-      {products.slice(startIndex, endIndex).map((product) => (
+      {sortedProds.slice(startIndex, endIndex).map((product) => (
         <ProductCard
           key={product.id}
           product={product}
