@@ -24,7 +24,11 @@ export default function Question3() {
         </h1>
         <div className="flex flex-wrap justify-center gap-[10px]">
           {answerArray.map((answer, i) => (
-            <AnswerButton key={i} answer={answer} />
+            <AnswerButton
+              key={i}
+              answer={answer}
+              questionType={"desiredBenefit"}
+            />
           ))}
         </div>
         <div className="flex justify-center items-center gap-[20px]">

@@ -2,7 +2,7 @@
 
 import { createContext, ReactNode, useContext, useState } from "react";
 
-type QuizState = {
+export type QuizState = {
   hairType: string;
   washFrequency: string;
   desiredBenefit: string;

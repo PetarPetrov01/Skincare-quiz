@@ -1,7 +1,6 @@
 "use client";
 
 import AnswerButton from "@/components/AnswerButton";
-import { useQuizContext } from "@/contexts/QuizContext";
 import Link from "next/link";
 
 const answerArray = [
@@ -13,8 +12,6 @@ const answerArray = [
 ];
 
 export default function Question4() {
-  const { answers, updateAnswer } = useQuizContext();
-
   return (
     <main className="min-h-[100vh] flex justify-center items-center">
       <div className="max-w-[985px] flex flex-col items-center text-black gap-8">
@@ -26,7 +23,7 @@ export default function Question4() {
             <AnswerButton
               key={i}
               answer={answer}
-              isActive={answers.hairConcern == answer.value}
+              questionType="hairConcern"
             />
           ))}
         </div>

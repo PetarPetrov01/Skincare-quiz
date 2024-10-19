@@ -1,7 +1,6 @@
 "use client";
 
 import AnswerButton from "@/components/AnswerButton";
-import { useQuizContext } from "@/contexts/QuizContext";
 import Link from "next/link";
 
 const answerArray = [
@@ -13,15 +12,17 @@ const answerArray = [
 ];
 
 export default function Question2() {
-  const { answers, updateAnswer } = useQuizContext();
-
   return (
     <main className="min-h-[100vh] flex justify-center items-center">
       <div className="max-w-[985px] flex flex-col items-center text-black gap-8">
         <h1 className="w-[20ch]">How often do you wash your hair?</h1>
         <div className="flex flex-wrap justify-center gap-[10px]">
           {answerArray.map((answer, i) => (
-            <AnswerButton key={i} answer={answer} isActive={answers.washFrequency == answer.value} />
+            <AnswerButton
+              key={i}
+              answer={answer}
+              questionType={"washFrequency"}
+            />
           ))}
         </div>
         <div className="flex justify-center items-center gap-[20px]">
