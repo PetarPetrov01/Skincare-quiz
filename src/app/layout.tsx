@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
-import { Red_Hat_Text, Chonburi } from "next/font/google";
+import { Red_Hat_Text, Chonburi, Bitter } from "next/font/google";
+import { QuizProvider } from "@/contexts/QuizContext";
 
 const redHatText = Red_Hat_Text({
   subsets: ["latin"],
@@ -12,6 +13,11 @@ const chonburi = Chonburi({
   weight: "400",
   subsets: ["latin"],
   variable: "--font-chonburi",
+});
+
+const bitter = Bitter({
+  variable: "--font-bitter",
+  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
@@ -27,9 +33,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${redHatText.variable} ${chonburi.variable} bg-white antialiased min-h-[100vh]`}
+        className={`${redHatText.variable} ${chonburi.variable} ${bitter.variable} bg-white antialiased min-h-[100vh]`}
       >
-        {children}
+        <QuizProvider>{children}</QuizProvider>
       </body>
     </html>
   );

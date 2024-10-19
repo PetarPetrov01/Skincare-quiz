@@ -42,4 +42,9 @@ body {
   p{
     font-size: 16px;
   }
+
+  span{
+    font-family: var(--font-bitter);
+    font-weight: 300;
+  }
 }

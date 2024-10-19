@@ -24,7 +24,7 @@ export default function Home() {
             </p>
           </div>
           <Link
-            href={"/"}
+            href={"/question1"}
             className="px-8 py-3 text-[16px] rounded-md bg-skyblue text-black"
           >
             Start the quiz
