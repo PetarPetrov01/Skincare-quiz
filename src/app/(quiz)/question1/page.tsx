@@ -1,13 +1,14 @@
 "use client";
 
 import AnswerButton from "@/components/AnswerButton";
+import ProgressBar from "@/components/ProgressBar";
 import Link from "next/link";
 
 const answerArray = [
-  { label: "a. Straight", value: "straight" },
-  { label: "b. Curly", value: "curly" },
-  { label: "c. Wavy", value: "wavy" },
-  { label: "d. Fine", value: "fine" },
+  { label: "a. Straight", value: "type_straight" },
+  { label: "b. Curly", value: "type_curly" },
+  { label: "c. Wavy", value: "type_wavy" },
+  { label: "d. Fine", value: "type_fine" },
 ];
 
 export default function Question1() {
@@ -17,11 +18,7 @@ export default function Question1() {
         <h1 className="w-[20ch]">What&apos;s your hair type or texture?</h1>
         <div className="flex flex-wrap justify-center gap-[10px]">
           {answerArray.map((answer, i) => (
-            <AnswerButton
-              key={i}
-              answer={answer}
-              questionType={"hairType"}
-            />
+            <AnswerButton key={i} answer={answer} questionType={"hairType"} />
           ))}
         </div>
         <div className="flex justify-center items-center gap-[20px]">
@@ -34,6 +31,9 @@ export default function Question1() {
           >
             Next question &rarr;
           </Link>
+        </div>
+        <div className="absolute top-1/3 right-[120px]">
+          <ProgressBar step={1}></ProgressBar>
         </div>
       </div>
     </main>

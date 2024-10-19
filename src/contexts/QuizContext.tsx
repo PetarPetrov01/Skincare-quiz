@@ -4,7 +4,7 @@ import { createContext, ReactNode, useContext, useState } from "react";
 
 export type QuizState = {
   hairType: string;
-  washFrequency: string;
+  washFrequency: string[];
   desiredBenefit: string;
   hairConcern: string;
   hairColor: string;
@@ -13,6 +13,7 @@ export type QuizState = {
 type QuizContext = {
   answers: QuizState;
   updateAnswer: (question: keyof QuizState, answer: string) => void;
+  updateFrequency: (answer: string[]) => void;
   resetAnswers: () => void;
 };
 
@@ -20,7 +21,7 @@ const QuizContext = createContext<QuizContext | null>(null);
 
 const initialState = {
   hairType: "",
-  washFrequency: "",
+  washFrequency: [""],
   desiredBenefit: "",
   hairConcern: "",
   hairColor: "",
@@ -36,6 +37,13 @@ export const QuizProvider = ({ children }: { children: ReactNode }) => {
     }));
   };
 
+  const updateFrequency = (answer: string[]) => {
+    setAnswers((prevState) => ({
+      ...prevState,
+      washFrequency: answer,
+    }));
+  };
+
   const resetAnswers = () => {
     setAnswers(initialState);
   };
@@ -44,6 +52,7 @@ export const QuizProvider = ({ children }: { children: ReactNode }) => {
     answers,
     updateAnswer,
     resetAnswers,
+    updateFrequency,
   };
 
   return <QuizContext.Provider value={data}>{children}</QuizContext.Provider>;

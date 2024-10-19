@@ -1,14 +1,15 @@
 "use client";
 
 import AnswerButton from "@/components/AnswerButton";
+import ProgressBar from "@/components/ProgressBar";
 import Link from "next/link";
 
 const answerArray = [
-  { label: "a. Breakage", value: "breakage" },
-  { label: "b. Frizz", value: "frizz" },
-  { label: "c. Scalp dryness", value: "dryness" },
-  { label: "d. Damage", value: "damage" },
-  { label: "e. Tangling", value: "tangling" },
+  { label: "a. Breakage", value: "goals_anti-ageing" },
+  { label: "b. Frizz", value: "type_frizzy" },
+  { label: "c. Scalp dryness", value: "type_dry" },
+  { label: "d. Damage", value: "goals_replenish" },
+  { label: "e. Tangling", value: "goals_straighten" },
 ];
 
 export default function Question4() {
@@ -37,6 +38,9 @@ export default function Question4() {
           >
             Next question &rarr;
           </Link>
+        </div>
+        <div className="absolute top-1/3 right-[120px]">
+          <ProgressBar step={4}></ProgressBar>
         </div>
       </div>
     </main>

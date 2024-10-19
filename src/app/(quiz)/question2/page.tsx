@@ -1,14 +1,15 @@
 "use client";
 
 import AnswerButton from "@/components/AnswerButton";
+import ProgressBar from "@/components/ProgressBar";
 import Link from "next/link";
 
 const answerArray = [
-  { label: "a. Daily", value: "daily" },
-  { label: "b. Every other day", value: "often" },
-  { label: "c. Twice a week", value: "regularly" },
-  { label: "d. Once a week", value: "occasionally" },
-  { label: "d. Every two weeks", value: "rarely" },
+  { label: "a. Daily", value: ["daily", "everyday"] },
+  { label: "b. Every other day", value: ["often"] },
+  { label: "c. Twice a week", value: ["regular"] },
+  { label: "d. Once a week", value: ["occasionally"] },
+  { label: "d. Every two weeks", value: ["rarely"] },
 ];
 
 export default function Question2() {
@@ -35,6 +36,9 @@ export default function Question2() {
           >
             Next question &rarr;
           </Link>
+        </div>
+        <div className="absolute top-1/3 right-[120px]">
+          <ProgressBar step={2}></ProgressBar>
         </div>
       </div>
     </main>

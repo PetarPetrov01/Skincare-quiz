@@ -1,14 +1,15 @@
 "use client";
 
 import AnswerButton from "@/components/AnswerButton";
+import ProgressBar from "@/components/ProgressBar";
 import Link from "next/link";
 
 const answerArray = [
   { label: "a. Black", value: "black" },
   { label: "b. Brown", value: "brown" },
   { label: "c. Blonde", value: "blonde" },
-  { label: "d. Red/Orange", value: "red/orange" },
-  { label: "e. Silver/Grey", value: "silver/gray" },
+  { label: "d. Red/Orange", value: "orange" },
+  { label: "e. Silver/Grey", value: "gray" },
 ];
 
 export default function Question5() {
@@ -35,6 +36,9 @@ export default function Question5() {
           >
             Discover your results
           </Link>
+        </div>
+        <div className="absolute top-1/3 right-[120px]">
+          <ProgressBar step={5}></ProgressBar>
         </div>
       </div>
     </main>
