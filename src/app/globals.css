@@ -17,11 +17,34 @@
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-red-hat-text);
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+}
+
+@layer base {
+  h1 {
+    font-size: 40px;
+    font-family: var(--font-chonburi);
+    text-align: center;
+    line-height: 44px;
+  }
+
+  h3 {
+    font-size: 24px;
+    font-family: var(--font-chonburi);
+  }
+
+  p{
+    font-size: 16px;
+  }
+
+  span{
+    font-family: var(--font-bitter);
+    font-weight: 300;
   }
 }
