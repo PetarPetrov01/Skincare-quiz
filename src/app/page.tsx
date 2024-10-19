@@ -1,5 +1,5 @@
+import LinkToBeginning from "@/components/RedirectToStart";
 import Image from "next/image";
-import Link from "next/link";
 
 export default function Home() {
   return (
@@ -23,12 +23,9 @@ export default function Home() {
               your needs.
             </p>
           </div>
-          <Link
-            href={"/question1"}
-            className="px-8 py-3 text-[16px] rounded-md bg-skyblue text-black"
-          >
+          <LinkToBeginning className="px-8 py-3 text-[16px] rounded-md bg-skyblue text-black">
             Start the quiz
-          </Link>
+          </LinkToBeginning>
         </div>
       </div>
     </main>
