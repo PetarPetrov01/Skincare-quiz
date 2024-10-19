@@ -11,7 +11,8 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-        skyblue: "#C3EDFF" 
+        skyblue: "#C3EDFF",
+        lightblue: "#5BC1ED"
       },
     },
   },
