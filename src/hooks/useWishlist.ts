@@ -9,12 +9,15 @@ function useWishlist(): [
   const wishlistKey = "wishlist";
 
   const [wishlist, setWishlistState] = useState<Wishlist>(() => {
-    const initialWishList = localStorage.getItem(wishlistKey);
+    const initialWishList =
+      typeof window !== "undefined" ? localStorage.getItem(wishlistKey) : null;
     return initialWishList ? (JSON.parse(initialWishList) as Wishlist) : [];
   });
 
   useEffect(() => {
-    localStorage.setItem(wishlistKey, JSON.stringify(wishlist));
+    typeof window !== "undefined"
+      ? localStorage.setItem(wishlistKey, JSON.stringify(wishlist))
+      : null;
   }, [wishlist]);
 
   const setWishlist = (
