@@ -18,7 +18,7 @@ export default async function ResultPage() {
   }
 
   return (
-    <main className="min-h-[539px] w-full flex justify-center items-center">
+    <main className="min-h-[539px] w-full flex justify-center items-center overflow-hidden">
       <div className="lg:max-w-[1500px] flex flex-col justify-center px-10">
         <div className="relative h-[539px] w-[640px] sm:w-[800px] md:w-[1222px] lg:w-[1440px]">
           <Image

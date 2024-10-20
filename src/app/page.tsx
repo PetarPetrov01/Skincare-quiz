@@ -4,9 +4,9 @@ import LinkToBeginning from "@/components/RedirectToStart";
 
 export default function Home() {
   return (
-    <main className="min-h-[526px] w-full flex justify-center items-center">
+    <main className="relative min-h-[526px] w-full flex justify-center items-center overflow-hidden">
       <div className="max-w-[1500px] flex justify-center px-10">
-        <div className="absolute top-0 z-0 h-[526px] w-[1440px] overflow-hidden bg-black">
+        <div className="absolute top-0 z-0 h-[526px] w-[640px] sm:w-[768px] md:w-[1024px] lg:w-[1440px] overflow-hidden bg-black">
           <Image
             src={"/home-image.jpg"}
             alt="home-image"
