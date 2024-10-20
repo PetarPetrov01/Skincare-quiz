@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, WheelEvent } from "react";
 import ProductCard from "./ProductCard";
 import { Product } from "@/types/Product";
 import { useQuizContext } from "@/contexts/QuizContext";
 import scoreProduct from "@/utils/scoreProducts";
+import { useDebouncedCallback } from "@/hooks/useDebounce";
 
 export default function Slider({
   products,
@@ -17,37 +18,75 @@ export default function Slider({
   const { answers } = useQuizContext();
 
   const scoredProds = products.map((prod) => scoreProduct(prod, answers));
-  const sortedProds = scoredProds.sort((a, b) => b.score - a.score);
-  const countOfNonZero = scoredProds.filter((p) => p.score > 0);
-  console.log(countOfNonZero.length);
-  console.log(countOfNonZero)
-  // TODO: Render this array!
+  const sortedProducts = scoredProds.sort((a, b) => b.score - a.score);
+  const filteredProducts = sortedProducts.filter((p) => p.score > 0);
 
-  const pagesCount = Math.ceil((products.length + 1) / 3);
+  const finalProds =
+    filteredProducts.length > 8
+      ? filteredProducts
+      : sortedProducts.slice(0, 10);
 
-  const startIndex = currentPage == 1 ? 0 : (currentPage - 1) * 3 - 1;
-  const endIndex = currentPage == 1 ? 2 : currentPage * 3 - 1;
+  console.log(sortedProducts);
+  console.log(filteredProducts);
+
+  const pagesCount = Math.ceil((finalProds.length + 1) / 3);
 
   const next = () => {
-    setCurrentPage(currentPage + 1);
+    if (currentPage < pagesCount) {
+      setCurrentPage(currentPage + 1);
+      const slider = document.getElementById("slider");
+      if (slider) {
+        slider.scrollLeft = currentPage * 1158;
+      }
+    }
   };
 
   const prev = () => {
-    setCurrentPage(currentPage - 1);
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+      const slider = document.getElementById("slider");
+      if (slider?.scrollLeft) {
+        if (currentPage == 2) {
+          slider.scrollLeft = 0;
+        } else if (currentPage == pagesCount) {
+          const lastProds = (finalProds.length + 1) % 3;
+          console.log(lastProds);
+          slider.scrollLeft = slider?.scrollLeft - lastProds * (350 + 36);
+        } else {
+          slider.scrollLeft = (currentPage - 2) * 1158;
+        }
+      }
+    }
   };
 
+  const handleScroll = (e: WheelEvent<HTMLDivElement>) => {
+    const scroll = e.deltaY;
+    if (scroll > 0) {
+      next();
+    } else if (scroll < 0) {
+      prev();
+    }
+  };
+
+  const delayedScrollNext = useDebouncedCallback(next, 150);
+  const delayedScrollPrev = useDebouncedCallback(prev, 150);
+
   return (
-    <div className="relative flex justify-between gap-[36px]">
+    <div className="relative">
       {currentPage > 1 && pagesCount > 1 && (
         <button
-          onClick={prev}
+          onClick={delayedScrollPrev}
           className="absolute left-[-4em] top-1/2 rounded-full bg-[#EEF7FB] w-[60px] text-2xl h-[60px] text-black"
         >
           &lt;
         </button>
       )}
-      {currentPage == 1 && (
-        <div className="w-[350px] h-[420px] flex flex-col gap-[16px] bg-[#EEF7FB] text-black rounded-xl py-[46px] px-[60px]">
+      <div
+        id="slider"
+        onWheel={handleScroll}
+        className="overflow-x-auto w-[1122px] scroll-smooth rounded-t-md whitespace-nowrap flex justify-between gap-[36px]"
+      >
+        <div className="min-w-[350px] h-[420px] flex flex-col whitespace-normal gap-[16px] bg-[#EEF7FB] text-black rounded-xl py-[46px] px-[60px]">
           <h3 className="text-center">Daily routine</h3>
           <p>
             Perfect for if you&apos;re looking for soft, nourished skin, our
@@ -58,18 +97,18 @@ export default function Slider({
             end of your day.
           </p>
         </div>
-      )}
-      {sortedProds.slice(startIndex, endIndex).map((product) => (
-        <ProductCard
-          key={product.id}
-          product={product}
-          // isWishlisted={wishlist.includes(product.id)}
-          // toggleWishlist={toggleWishlist}
-        />
-      ))}
+        {finalProds.map((product) => (
+          <ProductCard
+            key={product.id}
+            product={product}
+            // isWishlisted={wishlist.includes(product.id)}
+            // toggleWishlist={toggleWishlist}
+          />
+        ))}
+      </div>
       {currentPage < pagesCount && (
         <button
-          onClick={next}
+          onClick={delayedScrollNext}
           className="absolute right-[-4em] top-1/2 rounded-full bg-[#EEF7FB] w-[60px] text-2xl h-[60px] text-black"
         >
           &gt;
@@ -78,6 +117,7 @@ export default function Slider({
       <div className="absolute bottom-[-2em] left-1/2 -translate-x-1/2 flex justify-between items-center gap-1">
         {new Array(pagesCount).fill("").map((page, i) => (
           <i
+            key={i}
             className={`w-2 h-2 rounded-full duration-200 ${
               i + 1 == currentPage ? "bg-lightblue" : "bg-[#e3e3e3]"
             }`}
