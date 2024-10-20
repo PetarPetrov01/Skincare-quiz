@@ -59,8 +59,8 @@ export default function Slider({ products }: { products: Product[] }) {
         if (currentPage == 2) {
           slider.scrollLeft = 0;
         } else if (currentPage == pagesCount) {
-          const lastProds = (finalProds.length + 1) % 3;
-          slider.scrollLeft = slider?.scrollLeft - lastProds * (350 + 36);
+          const leftProds = (finalProds.length + 1) % 3;
+          slider.scrollLeft = slider?.scrollLeft - (leftProds || 3) * (350 + 36);
         } else {
           slider.scrollLeft = (currentPage - 2) * 1158;
         }
