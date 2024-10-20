@@ -1,14 +1,7 @@
 "use client";
 
 import { createContext, ReactNode, useContext, useState } from "react";
-
-export type QuizState = {
-  hairType: string;
-  washFrequency: string[];
-  desiredBenefit: string;
-  hairConcern: string;
-  hairColor: string;
-};
+import { QuizState } from "@/types/Quiz";
 
 type QuizContext = {
   answers: QuizState;

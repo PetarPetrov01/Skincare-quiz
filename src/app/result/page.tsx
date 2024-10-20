@@ -1,7 +1,9 @@
+import Image from "next/image";
+
 import LinkToBeginning from "@/components/RedirectToStart";
 import Slider from "@/components/Slider";
+
 import { Product } from "@/types/Product";
-import Image from "next/image";
 
 export default async function ResultPage() {
   let products: Product[] = [];

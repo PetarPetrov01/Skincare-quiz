@@ -1,8 +1,9 @@
 "use client";
 
+import Link from "next/link"
+;
 import AnswerButton from "@/components/AnswerButton";
 import ProgressBar from "@/components/ProgressBar";
-import Link from "next/link";
 
 const answerArray = [
   { label: "a. Breakage", value: "goals_anti-ageing" },
@@ -15,7 +16,7 @@ const answerArray = [
 export default function Question4() {
   return (
     <main className="min-h-[100vh] flex justify-center items-center">
-      <div className="max-w-[985px] flex flex-col items-center text-black gap-8">
+      <div className="relative 2xl:static max-w-[985px] flex flex-col items-center text-black gap-8">
         <h1 className="w-[20ch]">
           Is there anything troubling you about your hair?
         </h1>
@@ -39,7 +40,7 @@ export default function Question4() {
             Next question &rarr;
           </Link>
         </div>
-        <div className="absolute top-1/3 right-[120px]">
+        <div className="absolute top-0 right-[-70px] 2xl:top-1/3 2xl:right-[120px]">
           <ProgressBar step={4}></ProgressBar>
         </div>
       </div>

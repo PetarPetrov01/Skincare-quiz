@@ -1,5 +1,5 @@
-import { QuizState } from "@/contexts/QuizContext";
 import { Product, ScoredProduct } from "@/types/Product";
+import { QuizState } from "@/types/Quiz";
 
 export default function scoreProduct(
   product: Product,
@@ -9,9 +9,8 @@ export default function scoreProduct(
 
   const { washFrequency, hairColor, ...tagAnswers } = answers;
 
-
   product.tags.forEach((t) => {
-    for (let value of Object.values(tagAnswers)) {
+    for (const value of Object.values(tagAnswers)) {
       if (value && t.includes(value)) {
         score++;
       }
@@ -19,9 +18,11 @@ export default function scoreProduct(
   });
 
   if (
-    (hairColor && product.title.toLowerCase().includes(hairColor)) ||
-    product.body_html.toLowerCase().includes(hairColor)
+    hairColor &&
+    (product.title.toLowerCase().includes(hairColor) ||
+      product.body_html.toLowerCase().includes(hairColor))
   ) {
+    console.log(hairColor);
     score++;
   }
 
