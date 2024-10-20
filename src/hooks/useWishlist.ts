@@ -15,9 +15,9 @@ function useWishlist(): [
   });
 
   useEffect(() => {
-    typeof window !== "undefined"
-      ? localStorage.setItem(wishlistKey, JSON.stringify(wishlist))
-      : null;
+    if (typeof window !== "undefined") {
+      localStorage.setItem(wishlistKey, JSON.stringify(wishlist));
+    }
   }, [wishlist]);
 
   const setWishlist = (
