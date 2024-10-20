@@ -1,5 +1,6 @@
-import LinkToBeginning from "@/components/RedirectToStart";
 import Image from "next/image";
+
+import LinkToBeginning from "@/components/RedirectToStart";
 
 export default function Home() {
   return (

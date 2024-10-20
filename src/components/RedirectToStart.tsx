@@ -1,7 +1,8 @@
 "use client";
-import { useQuizContext } from "@/contexts/QuizContext";
 import Link from "next/link";
-import { HTMLAttributes, ReactNode } from "react";
+import { ReactNode } from "react";
+
+import { useQuizContext } from "@/contexts/QuizContext";
 
 export default function LinkToBeginning({
   children,
@@ -13,11 +14,7 @@ export default function LinkToBeginning({
   const { resetAnswers } = useQuizContext();
 
   return (
-    <Link
-      onClick={resetAnswers}
-      href={"/question1"}
-      className={className}
-    >
+    <Link onClick={resetAnswers} href={"/question1"} className={className}>
       {children}
     </Link>
   );

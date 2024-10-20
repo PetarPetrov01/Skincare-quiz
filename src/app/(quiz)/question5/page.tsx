@@ -1,12 +1,13 @@
 "use client";
 
-import AnswerButton from "@/components/AnswerButton";
-import ProgressBar from "@/components/ProgressBar";
-import { useQuizContext } from "@/contexts/QuizContext";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-
 import { useState } from "react";
+
+import { useQuizContext } from "@/contexts/QuizContext";
+
+import AnswerButton from "@/components/AnswerButton";
+import ProgressBar from "@/components/ProgressBar";
 
 const answerArray = [
   { label: "a. Black", value: "black" },

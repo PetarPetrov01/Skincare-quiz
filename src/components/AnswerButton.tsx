@@ -1,4 +1,6 @@
-import { QuizState, useQuizContext } from "@/contexts/QuizContext";
+import { useQuizContext } from "@/contexts/QuizContext";
+
+import { QuizState } from "@/types/Quiz";
 
 export default function AnswerButton({
   answer,

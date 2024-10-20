@@ -1,12 +1,16 @@
 "use client";
 
 import { useState, WheelEvent } from "react";
-import ProductCard from "./ProductCard";
-import { Product } from "@/types/Product";
+
 import { useQuizContext } from "@/contexts/QuizContext";
 import scoreProduct from "@/utils/scoreProducts";
+
 import { useDebouncedCallback } from "@/hooks/useDebounce";
 import useWishlist from "@/hooks/useWishlist";
+
+import ProductCard from "./ProductCard";
+
+import { Product } from "@/types/Product";
 
 export default function Slider({ products }: { products: Product[] }) {
   const [currentPage, setCurrentPage] = useState(1);

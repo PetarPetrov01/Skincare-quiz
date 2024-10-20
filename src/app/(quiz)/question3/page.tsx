@@ -1,8 +1,9 @@
 "use client";
 
+import Link from "next/link";
+
 import AnswerButton from "@/components/AnswerButton";
 import ProgressBar from "@/components/ProgressBar";
-import Link from "next/link";
 
 const answerArray = [
   { label: "a. Anti-breakage", value: "goals_anti-frizz" },

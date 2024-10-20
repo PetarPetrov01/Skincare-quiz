@@ -1,5 +1,7 @@
-import { Product } from "@/types/Product";
 import Image from "next/image";
+
+import { Product } from "@/types/Product";
+
 import { HeartIcon } from "@heroicons/react/24/solid";
 import { HeartIcon as HeartIconOutline } from "@heroicons/react/24/outline";
 
