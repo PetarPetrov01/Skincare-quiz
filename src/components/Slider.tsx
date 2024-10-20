@@ -6,32 +6,38 @@ import { Product } from "@/types/Product";
 import { useQuizContext } from "@/contexts/QuizContext";
 import scoreProduct from "@/utils/scoreProducts";
 import { useDebouncedCallback } from "@/hooks/useDebounce";
+import useWishlist from "@/hooks/useWishlist";
 
-export default function Slider({
-  products,
-}: //   wishlist,
-//   toggleWishlist,
-{
-  products: Product[];
-}) {
+export default function Slider({ products }: { products: Product[] }) {
   const [currentPage, setCurrentPage] = useState(1);
+  const [wishlist, setWishlist] = useWishlist();
   const { answers } = useQuizContext();
 
   const scoredProds = products.map((prod) => scoreProduct(prod, answers));
-  const sortedProducts = scoredProds.sort((a, b) => b.score - a.score);
-  const filteredProducts = sortedProducts.filter((p) => p.score > 0);
+  const sortedProducts = scoredProds.sort((a, b) => {
+    const isAWishListed = wishlist.includes(a.id);
+    const isBWishListed = wishlist.includes(b.id);
+
+    return isAWishListed && !isBWishListed
+      ? -1
+      : !isAWishListed && isBWishListed
+      ? 1
+      : b.score - a.score;
+  });
+  const filteredProducts = sortedProducts.filter(
+    (p) => p.score > 0 || wishlist.includes(p.id)
+  );
 
   const finalProds =
     filteredProducts.length > 8
       ? filteredProducts
       : sortedProducts.slice(0, 10);
 
-  console.log(sortedProducts);
-  console.log(filteredProducts);
+  console.log(finalProds);
 
   const pagesCount = Math.ceil((finalProds.length + 1) / 3);
 
-  const next = () => {
+  const scrollNext = () => {
     if (currentPage < pagesCount) {
       setCurrentPage(currentPage + 1);
       const slider = document.getElementById("slider");
@@ -41,7 +47,7 @@ export default function Slider({
     }
   };
 
-  const prev = () => {
+  const scrollPrev = () => {
     if (currentPage > 1) {
       setCurrentPage(currentPage - 1);
       const slider = document.getElementById("slider");
@@ -50,7 +56,6 @@ export default function Slider({
           slider.scrollLeft = 0;
         } else if (currentPage == pagesCount) {
           const lastProds = (finalProds.length + 1) % 3;
-          console.log(lastProds);
           slider.scrollLeft = slider?.scrollLeft - lastProds * (350 + 36);
         } else {
           slider.scrollLeft = (currentPage - 2) * 1158;
@@ -62,21 +67,29 @@ export default function Slider({
   const handleScroll = (e: WheelEvent<HTMLDivElement>) => {
     const scroll = e.deltaY;
     if (scroll > 0) {
-      next();
+      scrollNext();
     } else if (scroll < 0) {
-      prev();
+      scrollPrev();
     }
   };
 
-  const delayedScrollNext = useDebouncedCallback(next, 150);
-  const delayedScrollPrev = useDebouncedCallback(prev, 150);
+  const delayedScrollNext = useDebouncedCallback(scrollNext, 150);
+  const delayedScrollPrev = useDebouncedCallback(scrollPrev, 150);
+
+  const toggleWishlist = (productId: number) => {
+    if (wishlist.includes(productId)) {
+      setWishlist((prev) => prev.filter((id) => productId != id));
+    } else {
+      setWishlist([...wishlist, productId]);
+    }
+  };
 
   return (
     <div className="relative">
       {currentPage > 1 && pagesCount > 1 && (
         <button
           onClick={delayedScrollPrev}
-          className="absolute left-[-4em] top-1/2 rounded-full bg-[#EEF7FB] w-[60px] text-2xl h-[60px] text-black"
+          className="absolute left-[-4em] top-1/2 rounded-full bg-[#EEF7FB] w-[60px] text-2xl h-[60px] text-black hover:bg-[#e5f7fe] duration-150 hover:font-medium"
         >
           &lt;
         </button>
@@ -84,7 +97,7 @@ export default function Slider({
       <div
         id="slider"
         onWheel={handleScroll}
-        className="overflow-x-auto w-[1122px] scroll-smooth rounded-t-md whitespace-nowrap flex justify-between gap-[36px]"
+        className="overflow-x-auto w-[1122px] scroll-smooth rounded-t-md whitespace-nowrap flex justify-between gap-[36px] scrollbar-hide"
       >
         <div className="min-w-[350px] h-[420px] flex flex-col whitespace-normal gap-[16px] bg-[#EEF7FB] text-black rounded-xl py-[46px] px-[60px]">
           <h3 className="text-center">Daily routine</h3>
@@ -101,15 +114,15 @@ export default function Slider({
           <ProductCard
             key={product.id}
             product={product}
-            // isWishlisted={wishlist.includes(product.id)}
-            // toggleWishlist={toggleWishlist}
+            toggleWishlist={toggleWishlist}
+            isWishlisted={wishlist.includes(product.id)}
           />
         ))}
       </div>
       {currentPage < pagesCount && (
         <button
           onClick={delayedScrollNext}
-          className="absolute right-[-4em] top-1/2 rounded-full bg-[#EEF7FB] w-[60px] text-2xl h-[60px] text-black"
+          className="absolute right-[-4em] top-1/2 rounded-full bg-[#EEF7FB] w-[60px] text-2xl h-[60px] text-black hover:bg-[#e5f7fe] duration-150 hover:font-medium"
         >
           &gt;
         </button>

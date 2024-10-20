@@ -1,15 +1,19 @@
 import { Product } from "@/types/Product";
 import Image from "next/image";
+import { HeartIcon } from "@heroicons/react/24/solid";
+import { HeartIcon as HeartIconOutline } from "@heroicons/react/24/outline";
 
 export default function ProductCard({
   product,
-}: //   isWishlisted,
-//   toggleWishlist,
-{
+  isWishlisted,
+  toggleWishlist,
+}: {
   product: Product;
+  isWishlisted: boolean;
+  toggleWishlist: (productId: number) => void;
 }) {
   return (
-    <div className="w-[350px] h-[420px] flex flex-col  gap-[12px] rounded-xl text-black text-center">
+    <div className="relative w-[350px] h-[420px] flex flex-col  gap-[12px] rounded-xl text-black text-center">
       <div className="relative rounded-t-xl w-full h-full bg-[#EEF7FB]">
         <Image
           src={product.images[0].src}
@@ -24,9 +28,16 @@ export default function ProductCard({
         </h3>
         <span className="text-[18px]">${product.variants[0].price}</span>
       </div>
-      {/* <button onClick={() => toggleWishlist(product)}>
-        {isWishlisted ? "♥" : "♡"}
-      </button> */}
+      <button
+        onClick={() => toggleWishlist(product.id)}
+        className="absolute top-4 right-4 text-lg"
+      >
+        {isWishlisted ? (
+          <HeartIcon width={30} height={30} />
+        ) : (
+          <HeartIconOutline width={30} height={30} className="text-gray-500 hover:text-black duration-200"/>
+        )}
+      </button>
     </div>
   );
 }
