@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import scrollBarHide from "tailwind-scrollbar-hide";
 
 const config: Config = {
   content: [
@@ -12,10 +13,10 @@ const config: Config = {
         background: "var(--background)",
         foreground: "var(--foreground)",
         skyblue: "#C3EDFF",
-        lightblue: "#5BC1ED"
+        lightblue: "#5BC1ED",
       },
     },
   },
-  plugins: [],
+  plugins: [scrollBarHide],
 };
 export default config;
