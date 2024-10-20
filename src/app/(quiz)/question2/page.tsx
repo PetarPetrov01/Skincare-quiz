@@ -15,7 +15,7 @@ const answerArray = [
 export default function Question2() {
   return (
     <main className="min-h-[100vh] flex justify-center items-center">
-      <div className="max-w-[985px] flex flex-col items-center text-black gap-8">
+      <div className="relative 2xl:static max-w-[985px] flex flex-col items-center text-black gap-8">
         <h1 className="w-[20ch]">How often do you wash your hair?</h1>
         <div className="flex flex-wrap justify-center gap-[10px]">
           {answerArray.map((answer, i) => (
@@ -37,7 +37,7 @@ export default function Question2() {
             Next question &rarr;
           </Link>
         </div>
-        <div className="absolute top-1/3 right-[120px]">
+        <div className="absolute top-0 right-[-70px] 2xl:top-1/3 2xl:right-[120px]">
           <ProgressBar step={2}></ProgressBar>
         </div>
       </div>
