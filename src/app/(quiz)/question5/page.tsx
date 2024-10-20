@@ -49,8 +49,8 @@ export default function Question5() {
 
   return (
     <main className="min-h-[100vh] flex justify-center items-center">
-      <div className="relative 2xl:static max-w-[985px] flex flex-col items-center text-black gap-8">
-        <h1 className="w-[20ch]">What is your natural hair color(s) today?</h1>
+      <div className="lg:relative 2xl:static md:max-w-[985px] flex flex-col items-center text-black gap-8">
+        <h1 className="md:w-[20ch]">What is your natural hair color(s) today?</h1>
         <div className="flex flex-wrap justify-center gap-[10px]">
           {answerArray.map((answer, i) => (
             <AnswerButton key={i} answer={answer} questionType={"hairColor"} />
@@ -70,11 +70,11 @@ export default function Question5() {
             Discover your results
           </Link>
         </div>
-        <div className="absolute top-0 right-[-70px] 2xl:top-1/3 2xl:right-[120px]">
+        <div className="absolute top-5 md:top-8 lg:top-0 lg:right-[-70px] 2xl:top-1/3 2xl:right-[120px]">
           <ProgressBar step={5}></ProgressBar>
         </div>
         <div
-          className={`absolute bottom-[-100px] 2xl:bottom-[20%] right-1/2  translate-x-1/2 p-4 bg-red-300/80 rounded-lg duration-300 ${
+          className={`min-w-[240px] absolute bottom-14 md:bottom-20 lg:bottom-[-100px] 2xl:bottom-[20%] right-1/2  translate-x-1/2 p-4 bg-red-300/80 rounded-lg duration-300 ${
             showWarning
               ? "opacity-100 pointer-events-auto"
               : "opacity-0 pointer-events-none"

@@ -16,7 +16,7 @@ export default function Home() {
         </div>
         <div className="flex flex-col justify-between w-full h-full items-center gap-[25px] z-10">
           <div className="flex flex-col justify-between gap-[16px] items-center">
-            <h1 className="w-[20ch]">
+            <h1 className="md:w-[20ch]">
               Build a self care routine suitable for you
             </h1>
             <p className="w-[30ch] text-center">
