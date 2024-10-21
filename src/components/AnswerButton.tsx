@@ -1,3 +1,5 @@
+'use client'
+
 import { useQuizContext } from "@/contexts/QuizContext";
 
 import { QuizState } from "@/types/Quiz";
