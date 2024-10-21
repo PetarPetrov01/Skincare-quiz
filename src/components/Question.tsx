@@ -5,6 +5,7 @@ import AnswerButton from "./AnswerButton";
 import Link from "next/link";
 import ProgressBar from "./ProgressBar";
 import FinalQuestion from "./FinalQuestion";
+import { useQuizContext } from "@/contexts/QuizContext";
 
 export default function Question({
   answersArray,
@@ -13,6 +14,8 @@ export default function Question({
   answersArray: AnswersArray;
   question: QuestionType;
 }) {
+  const {answers} =useQuizContext()
+  console.log(answers);
   const prevQuestionUrl =
     question.number == 1 ? "/" : `/quiz/${question.number - 1}`;
   const nextQuestionUrl = `/quiz/${question.number + 1}`;

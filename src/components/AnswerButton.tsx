@@ -14,6 +14,7 @@ export default function AnswerButton({
   const { answers, updateAnswer, updateFrequency } = useQuizContext();
 
   const handleUpadteAnswer = () => {
+    console.log(answer.value)
     if (answer.value instanceof Array) {
       updateFrequency(answer.value);
     } else {

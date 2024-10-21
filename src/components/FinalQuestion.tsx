@@ -35,7 +35,7 @@ export default function FinalQuestion({
   ) => {
     e.preventDefault();
     if (areAllAnswered) {
-      router.push("/result");
+      router.push("/quiz/result");
     } else {
       setShowWarning(true);
       setTimeout(() => {
