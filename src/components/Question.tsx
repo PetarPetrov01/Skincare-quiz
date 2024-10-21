@@ -14,8 +14,7 @@ export default function Question({
   answersArray: AnswersArray;
   question: QuestionType;
 }) {
-  const {answers} =useQuizContext()
-  console.log(answers);
+  const {answers} = useQuizContext()
   const prevQuestionUrl =
     question.number == 1 ? "/" : `/quiz/${question.number - 1}`;
   const nextQuestionUrl = `/quiz/${question.number + 1}`;

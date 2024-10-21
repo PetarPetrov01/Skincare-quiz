@@ -75,6 +75,22 @@ const questionData: { question: QuestionType; answersArray: AnswersArray }[] = [
   },
 ];
 
-export default function getQuestionData(questionNumber: number){
-    return questionData[questionNumber - 1]
+export default function getQuestionData(questionNumber: number): {
+  question: QuestionType | null;
+  answersArray: AnswersArray | null;
+  error: null | string;
+} {
+  if (isNaN(questionNumber)) {
+    return { question: null, answersArray: null, error: "Not a number" };
+  }
+
+  if (questionNumber > questionData.length) {
+    return {
+      question: null,
+      answersArray: null,
+      error: "Question does not exist",
+    };
+  }
+
+  return { ...questionData[questionNumber - 1], error: null };
 }

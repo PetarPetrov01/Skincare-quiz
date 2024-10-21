@@ -16,9 +16,6 @@ export default function Slider({ products }: { products: Product[] }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [wishlist, setWishlist] = useWishlist();
   const { answers } = useQuizContext();
-  console.log('From slider')
-  console.log(answers)
-  console.log('---')
 
   const scoredProds = products.map((prod) => scoreProduct(prod, answers));
   const sortedProducts = scoredProds.sort((a, b) => {
@@ -31,12 +28,10 @@ export default function Slider({ products }: { products: Product[] }) {
       ? 1
       : b.score - a.score;
   });
-  console.log(sortedProducts);
 
   const filteredProducts = sortedProducts.filter(
     (p) => p.score > 0 || wishlist.includes(p.id)
   );
-  console.log(filteredProducts.length);
 
   const finalProds =
     filteredProducts.length > 8
