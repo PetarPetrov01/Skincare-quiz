@@ -16,6 +16,9 @@ export default function Slider({ products }: { products: Product[] }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [wishlist, setWishlist] = useWishlist();
   const { answers } = useQuizContext();
+  console.log('From slider')
+  console.log(answers)
+  console.log('---')
 
   const scoredProds = products.map((prod) => scoreProduct(prod, answers));
   const sortedProducts = scoredProds.sort((a, b) => {
@@ -28,16 +31,17 @@ export default function Slider({ products }: { products: Product[] }) {
       ? 1
       : b.score - a.score;
   });
+  console.log(sortedProducts);
+
   const filteredProducts = sortedProducts.filter(
     (p) => p.score > 0 || wishlist.includes(p.id)
   );
+  console.log(filteredProducts.length);
 
   const finalProds =
     filteredProducts.length > 8
       ? filteredProducts
       : sortedProducts.slice(0, 10);
-
-  console.log(finalProds);
 
   const pagesCount = Math.ceil((finalProds.length + 1) / 3);
 
@@ -60,7 +64,8 @@ export default function Slider({ products }: { products: Product[] }) {
           slider.scrollLeft = 0;
         } else if (currentPage == pagesCount) {
           const leftProds = (finalProds.length + 1) % 3;
-          slider.scrollLeft = slider?.scrollLeft - (leftProds || 3) * (350 + 36);
+          slider.scrollLeft =
+            slider?.scrollLeft - (leftProds || 3) * (350 + 36);
         } else {
           slider.scrollLeft = (currentPage - 2) * 1158;
         }
@@ -93,7 +98,7 @@ export default function Slider({ products }: { products: Product[] }) {
       {currentPage > 1 && pagesCount > 1 && (
         <button
           onClick={delayedScrollPrev}
-          className="absolute left-[-4em] top-1/2 rounded-full bg-[#EEF7FB] w-[60px] text-2xl h-[60px] text-black hover:bg-[#e5f7fe] duration-150 hover:font-medium"
+          className="hidden xl:block absolute left-[-4em] top-1/2 rounded-full bg-[#EEF7FB] w-[60px] text-2xl h-[60px] text-black hover:bg-[#e5f7fe] duration-150 hover:font-medium"
         >
           &lt;
         </button>
@@ -101,9 +106,9 @@ export default function Slider({ products }: { products: Product[] }) {
       <div
         id="slider"
         onWheel={handleScroll}
-        className="overflow-x-auto w-[1122px] scroll-smooth rounded-t-md whitespace-nowrap flex justify-between gap-[36px] scrollbar-hide"
+        className=" md:w-[820px] xl:w-[1122px] scroll-smooth rounded-t-md whitespace-nowrap flex flex-col items-center justify-center md:flex-wrap xl:overflow-x-auto xl:flex-nowrap xl:items-stretch md:flex-row xl:justify-between gap-[36px] scrollbar-hide"
       >
-        <div className="min-w-[350px] h-[420px] flex flex-col whitespace-normal gap-[16px] bg-[#EEF7FB] text-black rounded-xl py-[46px] px-[60px]">
+        <div className="w-[350px] sm:w-[450px] md:w-[600px] lg:min-w-[350px] m-2 lg:m-0 xl:h-[420px] flex flex-col whitespace-normal gap-[16px] bg-[#EEF7FB] text-black rounded-xl py-[46px] px-[60px]">
           <h3 className="text-center">Daily routine</h3>
           <p>
             Perfect for if you&apos;re looking for soft, nourished skin, our
@@ -126,12 +131,12 @@ export default function Slider({ products }: { products: Product[] }) {
       {currentPage < pagesCount && (
         <button
           onClick={delayedScrollNext}
-          className="absolute right-[-4em] top-1/2 rounded-full bg-[#EEF7FB] w-[60px] text-2xl h-[60px] text-black hover:bg-[#e5f7fe] duration-150 hover:font-medium"
+          className="hidden xl:block absolute right-[-4em] top-1/2 rounded-full bg-[#EEF7FB] w-[60px] text-2xl h-[60px] text-black hover:bg-[#e5f7fe] duration-150 hover:font-medium"
         >
           &gt;
         </button>
       )}
-      <div className="absolute bottom-[-2em] left-1/2 -translate-x-1/2 flex justify-between items-center gap-1">
+      <div className="hidden absolute bottom-[-2em] left-1/2 -translate-x-1/2 xl:flex justify-between items-center gap-1">
         {new Array(pagesCount).fill("").map((page, i) => (
           <i
             key={i}

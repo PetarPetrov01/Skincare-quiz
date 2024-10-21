@@ -22,7 +22,6 @@ export default function scoreProduct(
     (product.title.toLowerCase().includes(hairColor) ||
       product.body_html.toLowerCase().includes(hairColor))
   ) {
-    console.log(hairColor);
     score++;
   }
 
