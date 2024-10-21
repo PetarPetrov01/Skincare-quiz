@@ -1,24 +1,12 @@
 import Question from "@/components/Question";
-import { AnswersArray, QuestionType } from "@/types/Quiz";
+import getQuestionData from "@/data/questionsData";
 
-const question: QuestionType = {
-  number: 2,
-  type: "washFrequency",
-  label: `How often do you wash your hair?`,
-};
-
-const answerArray: AnswersArray = [
-  { label: "a. Daily", value: ["daily", "everyday"] },
-  { label: "b. Every other day", value: ["often"] },
-  { label: "c. Twice a week", value: ["regular"] },
-  { label: "d. Once a week", value: ["occasionally"] },
-  { label: "d. Every two weeks", value: ["rarely"] },
-];
+const { answersArray, question } = getQuestionData(2);
 
 export default function Question2() {
   return (
     <Question
-      answersArray={answerArray}
+      answersArray={answersArray}
       question={question}
       key={question.type}
     />

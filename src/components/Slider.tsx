@@ -37,8 +37,6 @@ export default function Slider({ products }: { products: Product[] }) {
       ? filteredProducts
       : sortedProducts.slice(0, 10);
 
-  console.log(finalProds);
-
   const pagesCount = Math.ceil((finalProds.length + 1) / 3);
 
   const scrollNext = () => {
